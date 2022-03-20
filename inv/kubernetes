@@ -1,0 +1,16 @@
+[master]
+192.168.1.10
+
+[node]
+192.168.1.11
+192.168.1.12
+
+[master:vars]
+machine=master
+
+[node:vars]
+machine=node
+
+[cluster:children]
+master
+node

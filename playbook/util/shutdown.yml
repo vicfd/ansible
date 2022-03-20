@@ -1,0 +1,7 @@
+# ansible-playbook -i inv/all -i inv/iptables -l <machine> playbook/util/shutdown.yml
+---
+- name: shutdown
+  hosts: all
+  tasks:
+  - name: shutdown
+    community.general.shutdown:

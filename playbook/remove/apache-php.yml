@@ -1,0 +1,22 @@
+# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/remove/apache-php.yml
+---
+- name: debian remove apache and php
+  hosts: all
+  tasks:
+    - name: remove packages
+      apt: name={{ item }} state=absent
+      loop:
+        - apache2
+        - php
+        - php-mysql
+        - php-xml
+        - php-zip
+        - php-mbstring
+        - php-gd
+        - php-curl
+        - php-intl
+        - php-imagick
+        - php-bcmath
+        - php-gmp
+        - php-apcu
+        - libapache2-mod-php

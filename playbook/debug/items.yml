@@ -1,0 +1,8 @@
+# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/debug/items.yml
+---
+- name: debug
+  hosts: all
+  tasks:
+    - name: print
+      debug: msg="{{ item.key }}"
+      with_dict: {a: 1, b: 2, c: 3}

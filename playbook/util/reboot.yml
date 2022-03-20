@@ -1,0 +1,7 @@
+# ansible-playbook -i inv/all -i inv/iptables -l <machine> playbook/util/reboot.yml
+---
+- name: reboot
+  hosts: all
+  tasks:
+  - name: reboot
+    reboot:

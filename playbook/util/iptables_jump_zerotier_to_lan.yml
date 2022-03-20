@@ -1,0 +1,13 @@
+# ansible-playbook -i inv/all -i inv/iptables -l <machine> playbook/util/iptables_jump_zerotier_to_lan.yml
+---
+- name: route zerotier network with raspberry
+  hosts: all
+  tasks:
+  - name: enable net.ipv4.ip_forward
+    sysctl: name=net.ipv4.ip_forward value='1' sysctl_set=yes
+  - name: POSTROUTING
+    iptables: table=nat chain=POSTROUTING out_interface={{ src_interface }} jump=MASQUERADE
+  - name: forward from zerotier to lan
+    iptables: chain=FORWARD in_interface={{ dst_interface }} out_interface={{ src_interface }} jump=ACCEPT
+  - name: forward from lan to zerotier
+    iptables: chain=FORWARD in_interface={{ src_interface }} out_interface={{ dst_interface }} ctstate=ESTABLISHED,RELATED jump=ACCEPT

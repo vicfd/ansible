@@ -1,0 +1,6 @@
+[all:vars]
+src_interface=wlan0
+dst_interface=ztuku2b6m3
+
+[all]
+192.168.1.10
