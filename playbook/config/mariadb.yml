@@ -1,11 +1,11 @@
-# ansible-playbook -i inv/all -i inv/lan -i inv/mariadb -l <machine> playbook/config/mariadb.yml --ash-vault-password
+# ansible-playbook -i inv/all -i inv/mariadb -l <server> playbook/config/mariadb.yml --ash-vault-password
 ---
 - import_playbook: ../install/mariadb.yml
 - name: debian mariadb config
   hosts: all
   tasks:
     - name: install mysql dependency
-      apt: name=python3-mysqldb state=latest  
+      apt: name=python3-mysqldb state=latest
     - name: create databases
       mysql_db: name={{ databases }} state=present
     - name: configure admin
