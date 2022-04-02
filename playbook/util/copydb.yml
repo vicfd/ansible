@@ -4,7 +4,7 @@
   hosts: all
   tasks:
   - name: dump database
-    mysql_db: state=dump name={{ database  }} target=/tmp/dump.sql
+    mysql_db: state=dump name={{ database }} target=/tmp/dump.sql
     when: name == 'src'
   - name: dump compressed
     archive: path=/tmp/dump.sql dest=/tmp/dump.bz2 format=bz2
@@ -16,7 +16,7 @@
     copy: src=/tmp/dump.bz2 dest=/tmp/dump.bz2
     when: name == 'dst'
   - name: restore database
-    mysql_db: name={{ database  }} state=import target=/tmp/dump.bz2 force=yes
+    mysql_db: name={{ database }} state=import target=/tmp/dump.bz2 force=yes
   - name: delete file sql
     file: path=/tmp/dump.sql state=absent
     when: name == 'src'
