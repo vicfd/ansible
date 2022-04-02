@@ -1,0 +1,26 @@
+# ansible-playbook -i inv/all -i inv/copydb playbook/util/copydb.yml
+---
+- name: copy mysql db
+  hosts: all
+  tasks:
+  - name: dump database
+    mysql_db: state=dump name=elestilolibre target=/tmp/dump.sql
+    when: name == 'src'
+  - name: dump compressed
+    archive: path=/tmp/dump.sql dest=/tmp/dump.bz2 format=bz2
+    when: name == 'src'
+  - name: fetch dump
+    fetch: src=/tmp/dump.bz2 dest=/tmp/dump.bz2 flat=yes
+    when: name == 'src'
+  - name: copy dump
+    copy: src=/tmp/dump.bz2 dest=/tmp/dump.bz2
+    when: name == 'dst'
+  - name: restore database
+    mysql_db: name=elestilolibre state=import target=/tmp/dump.bz2 force=yes
+  - name: delete file sql
+    file: path=/tmp/dump.sql state=absent
+    when: name == 'src'
+  - name: delete file bz2
+    file: path=/tmp/dump.bz2 state=absent
+  - name: delete file bz2 local
+    local_action: file path=/tmp/dump.bz2 state=absent
