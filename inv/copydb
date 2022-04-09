@@ -2,5 +2,5 @@
 database=elestilolibre
 
 [copy]
-192.168.1.11 name=src
-192.168.1.12 name=dst
+192.168.1.10 name=src
+192.168.1.11 name=dst
