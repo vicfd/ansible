@@ -1,4 +1,3 @@
-# ansible-playbook -i inv/all -i inv/lan -i inv/kubernetes -l cluster playbook/install/kubernetes.yml
 ---
 - import_playbook: ../util/upgrade.yml
 - import_playbook: ../install/docker.yml

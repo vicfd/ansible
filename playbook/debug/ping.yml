@@ -1,15 +1,14 @@
-# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/debug/ping.yml
 ---
 - name: debug
   hosts: all
   gather_facts: False
   ignore_unreachable: yes
   tasks:
-  - name: check connectivity
-    ping:
-    register: connectivity
-  - name: print test
-    debug: var=connectivity
-  - name: print error
-    debug: var=connectivity['msg']
-    when: connectivity['unreachable'] is defined
+    - name: check connectivity
+      ping:
+      register: connectivity
+    - name: print test
+      debug: var=connectivity
+    - name: print error
+      debug: var=connectivity['msg']
+      when: connectivity['unreachable'] is defined

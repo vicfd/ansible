@@ -1,11 +1,9 @@
-# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/install/apache-php.yml
 ---
 - import_playbook: ../util/upgrade.yml
-- name: debian apache and php installer
+- name: install apache
   hosts: all
   tasks:
-    - name: install packages
-      apt: name={{ item }} state=latest
+    - apt: name={{ item }} state=latest
       loop:
         - apache2
         - php

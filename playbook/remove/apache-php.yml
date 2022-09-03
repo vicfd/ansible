@@ -1,10 +1,8 @@
-# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/remove/apache-php.yml
 ---
-- name: debian remove apache and php
+- name: remove apache
   hosts: all
   tasks:
-    - name: remove packages
-      apt: name={{ item }} state=absent
+    - apt: name={{ item }} state=absent
       loop:
         - apache2
         - php

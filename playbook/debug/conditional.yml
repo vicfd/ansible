@@ -1,0 +1,13 @@
+---
+- name: debug
+  hosts: all
+  tasks:
+    - name: shell
+      shell: dpkg --get-selections | grep mariadb | wc -l
+      register: test
+    - name: end
+      meta: end_host
+      when: test.stdout | int > 0
+    - name: print
+      debug: var=test.stdout
+      when: test.stdout | int < 1

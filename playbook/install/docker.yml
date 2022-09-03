@@ -1,11 +1,9 @@
-# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/install/docker.yml
 ---
 - import_playbook: ../util/upgrade.yml
-- name: debian docker installer
+- name: install docker
   hosts: all
   tasks:
-    - name: install packages
-      apt: name={{ item }} state=latest
+    - apt: name={{ item }} state=latest
       loop:
         - docker
         - docker-compose

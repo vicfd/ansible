@@ -1,0 +1,10 @@
+---
+- name: configure administrator user
+  hosts: all
+  tasks:
+    - name: create user
+      user: name=vicfd state=present createhome=yes shell=/bin/bash
+    - name: allow sudo
+      lineinfile: path='/etc/sudoers' line='vicfd ALL=(ALL) NOPASSWD:ALL' validate='visudo -cf %s'
+    - name: set up authorized keys for the user
+      authorized_key: user=vicfd key="https://github.com/vicfd.keys"

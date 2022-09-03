@@ -1,0 +1,12 @@
+---
+- name: route zerotier network
+  hosts: all
+  tasks:
+    - name: enable net.ipv4.ip_forward
+      sysctl: name=net.ipv4.ip_forward value='1' sysctl_set=yes
+    - name: postrouting
+      iptables: table=nat chain=POSTROUTING out_interface={{ src_interface }} jump=MASQUERADE
+    - name: forward from zerotier to lan
+      iptables: chain=FORWARD in_interface={{ dst_interface }} out_interface={{ src_interface }} jump=ACCEPT
+    - name: forward from lan to zerotier
+      iptables: chain=FORWARD in_interface={{ src_interface }} out_interface={{ dst_interface }} ctstate=ESTABLISHED,RELATED jump=ACCEPT

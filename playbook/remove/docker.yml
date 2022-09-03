@@ -1,10 +1,8 @@
-# ansible-playbook -i inv/all -i inv/lan -l <machine> playbook/remove/docker.yml
 ---
-- name: debian remove docker
+- name: remove docker
   hosts: all
   tasks:
-    - name: remove packages
-      apt: name={{ item }} state=absent
+    - apt: name={{ item }} state=absent
       loop:
         - docker
         - docker-compose

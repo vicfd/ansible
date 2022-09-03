@@ -1,7 +1,5 @@
-# ansible-playbook -i inv/all -i inv/mariadb -l <server> playbook/config/mariadb.yml --ash-vault-password
 ---
-- import_playbook: ../install/mariadb.yml
-- name: debian mariadb config
+- name: mariadb config
   hosts: all
   tasks:
     - name: install mysql dependency
@@ -10,7 +8,3 @@
       mysql_db: name={{ databases }} state=present
     - name: configure admin
       mysql_user: name={{ admin_name }} host={{ admin_host }} password={{ admin_password }} encrypted=yes priv={{ admin_permission }} state=present
-      no_log: true
-    - name: configure wordpress
-      mysql_user: name={{ wordpress_name }} host={{ wordpress_host }} password={{ wordpress_password }} encrypted=yes priv={{ wordpress_permission }} state=present
-      no_log: true
