@@ -3,7 +3,8 @@
 - name: install apache
   hosts: all
   tasks:
-    - apt: name={{ item }} state=latest
+    - name: install apache
+      apt: name={{ item }} state=latest
       loop:
         - apache2
         - php

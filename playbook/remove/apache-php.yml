@@ -2,7 +2,8 @@
 - name: remove apache
   hosts: all
   tasks:
-    - apt: name={{ item }} state=absent
+    - name: remove apache
+      apt: name={{ item }} state=absent
       loop:
         - apache2
         - php

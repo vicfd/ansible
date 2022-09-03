@@ -2,4 +2,5 @@
 - name: shutdown
   hosts: all
   tasks:
-    - community.general.shutdown:
+    - name: shutdown
+      community.general.shutdown:

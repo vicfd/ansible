@@ -2,7 +2,8 @@
 - name: remove docker
   hosts: all
   tasks:
-    - apt: name={{ item }} state=absent
+    - name: remove docker
+      apt: name={{ item }} state=absent
       loop:
         - docker
         - docker-compose
