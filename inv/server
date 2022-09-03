@@ -1,0 +1,9 @@
+[raspberry]
+192.168.200.20
+
+[docker]
+192.168.200.57
+
+[lan:children]
+raspberry
+docker

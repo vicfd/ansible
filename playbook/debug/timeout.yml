@@ -1,0 +1,8 @@
+---
+- name: debug
+  hosts: all
+  tasks:
+  - shell: ping -c 4 127.0.0.1
+    register: ping
+  - shell: echo "{{ ping.stdout | regex_replace('\n','') }}" > /tmp/test.csv
+    delegate_to: localhost

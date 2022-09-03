@@ -1,6 +1,6 @@
 [all:vars]
-src_interface=ens160
+src_interface=eth0
 dst_interface=ztuku2b6m3
 
 [all]
-192.168.200.57
+192.168.200.10
